@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prprv.ssm.mapper.UserMapper">
+    <!-- mapper 接口和映射文件对应
+         1. mapper 接口的全限定名和映射文件的 namespace 属性值相同
+         2. mapper 接口的方法名和映射文件的 statement 的 id 属性值相同
+    -->
+
+    <!-- int insertUser(User user); -->
+    <!-- 通过 #{} 访问实体类中的属性名获取相应的属性值 -->
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="uid">
+        insert into info_user values (null,#{email},#{username},#{password},#{admin})
+    </insert>
+
+    <!-- int updateUser(); -->
+    <update id="updateUser">
+        update info_user set email=#{email},username=#{username},password=#{password},admin=#{admin}
+        where uid=#{uid}
+    </update>
+
+    <!-- int deleteUser(@Param("uid") Integer uid); -->
+    <delete id="deleteUser">
+        delete from info_user where uid = #{uid}
+    </delete>
+
+    <!-- User selectUserById(); -->
+    <!-- resultType: 返回值类型 -->
+    <!-- resultMap: 自定义映射 -->
+    <!-- User selectUserById(@Param("uid") Integer uid); -->
+    <select id="selectUserById" resultType="User">
+        select * from info_user where uid = #{uid}
+    </select>
+
+    <!-- User selectUserByEmail(@Param("email") String email); -->
+    <select id="selectUserByEmail" resultType="User">
+        select * from info_user where email = #{email}
+    </select>
+
+    <!-- User selectUserByName(String username); -->
+    <!-- '${}' 本质是字符串拼接（外面要加单引号），#{里面可以随便写} 本质是占位符'?'赋值 -->
+    <!-- List<User> selectUserByName(@Param("username") String username); -->
+    <select id="selectUserByName" resultType="User">
+        select * from info_user where username = #{username}
+    </select>
+
+    <!-- User checkLogin(String username, String password); -->
+    <!-- 多参数需要填 #{arg0} #{arg1} ... 或者 #{param0} #{param1} ... -->
+    <!-- User checkLogin(@Param("username") String username, @Param("password") String password); -->
+    <select id="checkLogin" resultType="User">
+        select * from info_user where email = #{email} and password = #{password}
+    </select>
+
+
+    <!-- 自定义Map -->
+    <!-- User checkLoginByMap(Map<String, Object> map); #{里面为Map的Key}-->
+    <select id="checkLoginByMap" resultType="User">
+        select * from info_user where email = #{email} and password = #{password}
+    </select>
+
+    <!-- 使用注解 @Param() -->
+    <!-- User selectUserByParam(@Param("username") String username, @Param("password") String password); -->
+    <select id="selectUserByParam" resultType="User">
+        select * from info_user where email = #{email} and password = #{password}
+    </select>
+
+    <!-- List<User> selectAllUser(); -->
+    <select id="selectAllUser" resultType="User">
+        select * from info_user
+    </select>
+
+    <!--
+        @MapKey("uid")
+        Map<String, Object> selectAllUserToMap();
+    -->
+    <select id="selectAllUserToMap" resultType="Map">
+        select * from info_user
+    </select>
+</mapper>

@@ -1,0 +1,16 @@
+### 登录
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "email": "测试@p.p",
+  "password": "123456"
+}
+
+### 注册
+POST http://localhost:80/api/item
+Content-Type: application/json
+
+{}
+
+###
