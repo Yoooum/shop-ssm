@@ -7,7 +7,6 @@ import com.prprv.ssm.service.impl.LoginServiceImpl;
 import com.prprv.ssm.utils.RequestUtil;
 import lombok.extern.log4j.Log4j2;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

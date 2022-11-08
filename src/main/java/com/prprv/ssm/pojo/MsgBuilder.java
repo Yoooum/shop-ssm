@@ -13,6 +13,7 @@ public class MsgBuilder {
     private Integer code;
     private String msg;
     private Object data;
+
     public JSONObject toJson() {
         JSONObject obj = new JSONObject();
         obj.put("code", this.code);
